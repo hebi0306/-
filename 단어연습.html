@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+</head>
+<body>
+    <div class="container">
+        <h1>단어 연상하기</h1> 
+        <p>다음의 두 가지 자음이 들어가는 단어를 10개 이상 적어보세요.</p>
+        
+        <div class="box">
+            <div class="box-header">
+                <div class="consonants-group">
+                    <span class="consonants">ㅅ ㅁ</span>
+                    <button class="input-btn" data-consonants="ㅅ ㅁ">입력하기</button>
+                </div>
+                <span class="example">예) 사막, 소망</span>
+            </div>
+            <div class="output" id="output-ㅅㅁ"></div>
+        </div>
+        
+        <div class="box">
+            <div class="box-header">
+                <div class="consonants-group">
+                    <span class="consonants">ㄱ ㅂ</span>
+                    <button class="input-btn" data-consonants="ㄱ ㅂ">입력하기</button>
+                </div>
+                <span class="example">예) 고비, 공부</span>
+            </div>
+            <div class="output" id="output-ㄱㅂ"></div>
+        </div>
+
+        <div class="box">
+            <div class="box-header">
+                <div class="consonants-group">
+                    <span class="consonants">ㅇ ㄹ</span>
+                    <button class="input-btn" data-consonants="ㅇ ㄹ">입력하기</button>
+                </div>
+                <span class="example">예) 오리, 요리</span>
+            </div>
+            <div class="output" id="output-ㅇㄹ"></div>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.input-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const consonants = this.getAttribute('data-consonants');
+                const outputElement = document.getElementById('output-' + consonants.replace(/ /g, ''));
+                const currentText = outputElement.innerText;
+                const words = currentText ? currentText.split(', ') : [];
+                
+                if (words.length >= 10) {
+                    alert('단어가 10개를 초과할 수 없습니다.');
+                    return;
+                }
+
+                const input = prompt(consonants + ' 자음이 들어가는 단어를 입력하세요 (10개 이상)');
+                if (input) {
+                    if (words.length > 0) {
+                        outputElement.innerText = currentText + ', ' + input;
+                    } else {
+                        outputElement.innerText = input;
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
